@@ -9,7 +9,7 @@ const PORT = 3001;
 
 //midleware for cookie and json
 //restricted login can be done in react.
-connection('mongodb://127.0.0.1:27017/vaultItemApp')
+connection('mongodb://XXXXX/vaultItemApp')
 
 //middleware
 app.use(cors({
