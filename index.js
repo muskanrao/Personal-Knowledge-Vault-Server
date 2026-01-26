@@ -1,6 +1,8 @@
-import express from "express"
+import express from "express";
 import connection from "./connection.js";
-import authRouter from './Routes/user.js'
+import authRouter from './Routes/user.js';
+import apiRoute from './Routes/index.js';
+import cors from "cors"
 
 const app = express();
 const PORT = 3001;
@@ -10,11 +12,16 @@ const PORT = 3001;
 connection('mongodb://127.0.0.1:27017/vaultItemApp')
 
 //middleware
+app.use(cors({
+    origin: "http://localhost:5173", // your React app
+    credentials: true
+}));
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 
 //routes
 app.use('/api/user',authRouter)
+app.use('/api/vault',apiRoute)
 //routes
 app.listen(PORT, ()=> {
     console.log(`Server connected on ${PORT}`)
